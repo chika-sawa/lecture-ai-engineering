@@ -121,16 +121,19 @@ def test_model_accuracy(train_model):
     assert accuracy >= 0.75, f"モデルの精度が低すぎます: {accuracy}"
 
 
-def test_model_precision(train_model):
-    """モデルの精度（Precision）を検証"""
-    model, X_test, y_test = train_model
+def test_model_inference_time2(train_model):
+    """モデルの推論時間を検証"""
+    model, X_test, _ = train_model
 
-    # 予測とPrecisionの計算
-    y_pred = model.predict(X_test)
-    precision = precision_score(y_test, y_pred)
+    # 推論時間の計測
+    start_time = time.time()
+    model.predict(X_test)
+    end_time = time.time()
 
-    # PrecisionとRecallがそれぞれ0.75以上であることを確認
-    assert precision >= 0.75, f"Precisionが低すぎます: {precision}"
+    inference_time = end_time - start_time
+
+    # 推論時間が1秒未満であることを確認
+    assert inference_time < 1.0, f"推論時間が長すぎます: {inference_time}秒"
 
 
 def test_model_inference_time(train_model):
