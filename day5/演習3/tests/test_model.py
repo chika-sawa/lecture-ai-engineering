@@ -132,6 +132,7 @@ def test_model_precision(train_model):
     # PrecisionとRecallがそれぞれ0.75以上であることを確認
     assert precision >= 0.75, f"Precisionが低すぎます: {precision}"
 
+
 def test_model_inference_time(train_model):
     """モデルの推論時間を検証"""
     model, X_test, _ = train_model
