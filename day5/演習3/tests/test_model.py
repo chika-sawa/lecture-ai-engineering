@@ -6,7 +6,7 @@ import pickle
 import time
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score, precision_score
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from sklearn.compose import ColumnTransformer
@@ -119,6 +119,18 @@ def test_model_accuracy(train_model):
 
     # Titanicデータセットでは0.75以上の精度が一般的に良いとされる
     assert accuracy >= 0.75, f"モデルの精度が低すぎます: {accuracy}"
+
+
+def test_model_precision(train_model):
+    """モデルの精度（Precision）を検証"""
+    model, X_test, y_test = train_model
+
+    # 予測とPrecisionの計算
+    y_pred = model.predict(X_test)
+    precision = precision_score(y_test, y_pred)
+
+    # PrecisionとRecallがそれぞれ0.75以上であることを確認
+    assert precision >= 0.75, f"Precisionが低すぎます: {precision}"
 
 
 def test_model_inference_time(train_model):
