@@ -6,7 +6,7 @@ import pickle
 import time
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score, precision_score, recall_score
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from sklearn.compose import ColumnTransformer
@@ -171,3 +171,20 @@ def test_model_reproducibility(sample_data, preprocessor):
     assert np.array_equal(
         predictions1, predictions2
     ), "モデルの予測結果に再現性がありません"
+
+
+    def test_model_precision_and_recall(train_model):
+        """モデルの精度（PrecisionとRecall）を検証"""
+
+        model, X_test, y_test = train_model
+
+        # 予測
+        y_pred = model.predict(X_test)
+
+        # PrecisionとRecallの計算
+        precision = precision_score(y_test, y_pred)
+        recall = recall_score(y_test, y_pred)
+
+        # PrecisionとRecallがそれぞれ0.7以上であることを確認
+        assert precision >= 0.7, f"Precisionが低すぎます: {precision}"
+        assert recall >= 0.7, f"Recallが低すぎます: {recall}"
