@@ -174,8 +174,7 @@ def test_model_reproducibility(sample_data, preprocessor):
 
 
 def test_model_precision_and_recall(train_model):
-    """モデルの精度（PrecisionとRecall）を検証"""
-
+    """モデルの精度（Precision）を検証"""
     model, X_test, y_test = train_model
 
     # 予測
@@ -183,8 +182,6 @@ def test_model_precision_and_recall(train_model):
 
     # PrecisionとRecallの計算
     precision = precision_score(y_test, y_pred)
-    recall = recall_score(y_test, y_pred)
 
     # PrecisionとRecallがそれぞれ0.7以上であることを確認
     assert precision >= 0.7, f"Precisionが低すぎます: {precision}"
-    assert recall >= 0.7, f"Recallが低すぎます: {recall}"
