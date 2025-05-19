@@ -111,6 +111,7 @@ def test_model_exists():
 
 def test_model_accuracy(train_model):
     """モデルの精度を検証"""
+    """テストコメント"""
     model, X_test, y_test = train_model
 
     # 予測と精度計算
