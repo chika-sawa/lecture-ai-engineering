@@ -112,7 +112,7 @@ def test_model_exists():
 def test_model_accuracy(train_model):
     """モデルの精度を検証"""
     """テストコメント"""
-    
+
     model, X_test, y_test = train_model
 
     # 予測と精度計算
@@ -170,6 +170,4 @@ def test_model_reproducibility(sample_data, preprocessor):
     predictions1 = model1.predict(X_test)
     predictions2 = model2.predict(X_test)
 
-    assert np.array_equal(
-        predictions1, predictions2
-    ), "モデルの予測結果に再現性がありません"
+    assert np.array_equal(predictions1, predictions2), "モデルの予測結果に再現性がありません"
