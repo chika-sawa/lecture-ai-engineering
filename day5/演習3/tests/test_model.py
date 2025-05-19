@@ -129,8 +129,8 @@ def test_model_precision(train_model):
     y_pred = model.predict(X_test)
     precision = precision_score(y_test, y_pred)
 
-    # PrecisionとRecallがそれぞれ0.7以上であることを確認
-    assert precision >= 0.7, f"Precisionが低すぎます: {precision}"
+    # PrecisionとRecallがそれぞれ0.75以上であることを確認
+    assert precision >= 0.75, f"Precisionが低すぎます: {precision}"
 
 
 def test_model_inference_time(train_model):
