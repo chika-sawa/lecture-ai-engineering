@@ -120,6 +120,18 @@ def test_model_accuracy(train_model):
     # Titanicデータセットでは0.75以上の精度が一般的に良いとされる
     assert accuracy >= 0.75, f"モデルの精度が低すぎます: {accuracy}"
 
+def test_model_precision(train_model):
+    """モデルの精度（Precision）を検証"""
+    model, X_test, y_test = train_model
+
+    # 予測
+    y_pred = model.predict(X_test)
+
+    # PrecisionとRecallの計算
+    precision = precision_score(y_test, y_pred)
+
+    # PrecisionとRecallがそれぞれ0.7以上であることを確認
+    assert precision >= 0.7, f"Precisionが低すぎます: {precision}"
 
 def test_model_inference_time(train_model):
     """モデルの推論時間を検証"""
@@ -173,15 +185,3 @@ def test_model_reproducibility(sample_data, preprocessor):
     ), "モデルの予測結果に再現性がありません"
 
 
-def test_model_precision_and_recall(train_model):
-    """モデルの精度（Precision）を検証"""
-    model, X_test, y_test = train_model
-
-    # 予測
-    y_pred = model.predict(X_test)
-
-    # PrecisionとRecallの計算
-    precision = precision_score(y_test, y_pred)
-
-    # PrecisionとRecallがそれぞれ0.7以上であることを確認
-    assert precision >= 0.7, f"Precisionが低すぎます: {precision}"
